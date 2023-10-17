@@ -13,6 +13,7 @@ public class Menu {
 
         switch (option) {
             case 1 -> url.download();
+            case 2 -> url.charCounter('a');
             case 3 -> url.replaceLetter('a', 'c');
             default -> System.out.println("Opció no vàlida");
         }

@@ -46,22 +46,20 @@ public class URL {
     }
 
     public void charCounter(char selection) {
-
-        final Process process = getProcess("carregarweb/CarregarWeb.java");
+        final Process process = getProcess("AnalitzarCaracters/AnalitzarCaracters.java");
 
         try {
-            try (var writer = process.outputWriter()) {
-                writeLine(selection, writer);
-
-                sendHTML(writer);
+            try (var writer = new Writer(process.outputWriter())) {
+                writer.writeLine(selection);
+                writer.writeLines(HTML);
             }
 
             process.waitFor();
 
-            try (BufferedReader reader = process.inputReader()) {
-                HTML = reader.lines().toList().toArray(new String[0]);
+            try (var reader = new Reader(process.inputReader())) {
+                reader.toSystemOut();
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             System.out.println("ERROR : " + e.getMessage());
         }
 
@@ -72,18 +70,16 @@ public class URL {
         final Process process = getProcess("substituirlletra/SubstituirLletra.java");
 
         try {
-
-            try (var writer = process.outputWriter()) {
-                writeLine(oldChar, writer);
-                writeLine(newChar, writer);
-
-                sendHTML(writer);
+            try (var writer = new Writer(process.outputWriter())) {
+                writer.writeLine(oldChar);
+                writer.writeLine(newChar);
+                writer.writeLines(HTML);
             }
 
             process.waitFor();
 
-            try (var reader = process.getInputStream()) {
-                print(reader);
+            try (var reader = new Reader(process.inputReader())) {
+                reader.toSystemOut();
             }
 
         } catch (IOException | InterruptedException e) {
@@ -92,26 +88,6 @@ public class URL {
     }
 
     // Private Methods
-
-    private static void print(InputStream reader) throws IOException {
-        reader.transferTo(System.out);
-    }
-
-    private void sendHTML(BufferedWriter writer) throws IOException {
-        for (String line : HTML) {
-            writeLine(line, writer);
-        }
-    }
-
-    private static void writeLine(String selection, BufferedWriter writer) throws IOException {
-        writer.write(selection);
-        writer.newLine();
-    }
-
-    private static void writeLine(char selection, BufferedWriter writer) throws IOException {
-        writer.write(selection);
-        writer.newLine();
-    }
 
     private Process getProcess(String x) {
         Process p = null;
