@@ -4,7 +4,9 @@ public class Main {
 
     private static final Scanner console = new Scanner(System.in);
     public static void main(String[] args) {
-        getUrl();
+        URL url = getUrl();
+
+        Menu.mainLoop(url);
     }
 
     static URL getUrl() {
