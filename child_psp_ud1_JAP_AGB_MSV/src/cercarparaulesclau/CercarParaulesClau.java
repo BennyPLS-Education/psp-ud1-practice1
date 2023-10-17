@@ -2,18 +2,15 @@ package cercarparaulesclau;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.List;
 
 /***
- * ECNUNCIAT:
- *      El procés fill ha de sol·licitar una paraula que és vulgui cercar, donada aquesta
- *      paraula, el procés fill ha de cercar si existeix o no la paraula almenys un cop dins el
- *      codi.
+ * This program recives a word to search in a text and the text
+ * then prints if the text contains the word
  *
  * PROTOCOL:
- *      1.
- *
- *
+ * 1. Recieve word to search
+ * 2. Recive HTML
+ * 3. Prints if contains the word or not
  */
 
 public class CercarParaulesClau {
@@ -24,8 +21,8 @@ public class CercarParaulesClau {
         var hasWord = String.join("", in.lines().toList()).contains(word);
 
         if (hasWord)
-            System.out.println();
+            System.out.println("Si que conte la paraula");
         else
-            System.out.println();
+            System.out.println("No conte la paraula");
     }
 }
