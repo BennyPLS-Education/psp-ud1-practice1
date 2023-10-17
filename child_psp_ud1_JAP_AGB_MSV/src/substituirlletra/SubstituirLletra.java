@@ -7,7 +7,8 @@ import java.io.PrintWriter;
 
 /**
  * Reads two characters, the character to be replaced and the character
- * that replaces. Then we read the text content (html) and print the replaced text
+ * that replaces. Then we read the text content (html) and stores the resulting
+ * text into encrypted.txt
  * PROTOCOL:
  * 1. send old char
  * 2. send new char
@@ -23,8 +24,8 @@ public class SubstituirLletra {
 
         in.lines().map(line -> line.replaceAll(text_to_replace, text_to_replace_with))
                   .forEach(writer::println);
-        
+
         writer.close();
-        System.out.println("File 'encrypted.dat' created successfully");
+        System.out.println("Arxiu creat amb exit");
     }
 }
