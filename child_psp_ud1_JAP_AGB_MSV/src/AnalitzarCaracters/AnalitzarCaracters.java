@@ -27,6 +27,9 @@ public class AnalitzarCaracters {
 
         while((linea = in.readLine()) != null) {
             text += linea;
+            if (linea.equals("exit")) {
+                break;
+            }
         }
         System.out.println(countLetter(text, letter.charAt(0)) + "\n");
 
