@@ -7,7 +7,7 @@ import java.util.Scanner;
 * count the number of times a character appears in a html
 *
 * PROTOCOL
-* 1. send old char
+* 1. send char
 * 2. send html
 * 3. you shuld receive the number of times the char is in the html
 *
@@ -27,6 +27,7 @@ public class AnalitzarCaracters {
 
         while((linea = in.readLine()) != null) {
             text += linea;
+            if (linea.equals(" ")) break;
         }
         System.out.println(countLetter(text, letter.charAt(0)) + "\n");
 
