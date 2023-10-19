@@ -16,14 +16,33 @@ public class Menu {
                 url.download();
                 System.out.println(url.getHtml());
             }
-            case 2 -> url.charCounter('a');
-            case 3 -> url.replaceLetter('a', 'c');
+            case 2 -> {
+                System.out.print("Introdueix el caracter que vols contar: ");
+                url.charCounter(getUserInputChar());
+            }
+            case 3 -> {
+                System.out.print("Introdueix el caracter que vols cambiar i el que el cambiara respectivament: ");
+                url.replaceLetter(getUserInputChar(), getUserInputChar());
+            }
+            case 4 -> throw new UnsupportedOperationException("Not implemented yet");
+            case 5 -> throw new UnsupportedOperationException("Not implemented yet");
+            case 6 -> throw new UnsupportedOperationException("Not implemented yet");
             case 7 -> url.executeBrowser();
             case 8 -> System.exit(0);
             default -> System.out.println("Opció no vàlida");
         }
 
         if (option != 8) mainLoop(url);
+    }
+
+    static char getUserInputChar() {
+        String input = console.nextLine();
+        if (input.length() != 1) {
+            System.out.println("ERROR : Has d'introduir un caracter");
+            return getUserInputChar();
+        }
+
+        return input.charAt(0);
     }
 
     static String getUserInput() {

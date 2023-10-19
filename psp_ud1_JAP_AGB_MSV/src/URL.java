@@ -44,6 +44,8 @@ public class URL {
     }
 
     public void charCounter(char selection) {
+        if (HTML == null) download();
+
         final Process process = getProcess("AnalitzarCaracters/AnalitzarCaracters.java");
 
         try {
