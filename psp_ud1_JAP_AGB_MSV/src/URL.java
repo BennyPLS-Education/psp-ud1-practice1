@@ -85,8 +85,6 @@ public class URL {
         }
     }
 
-
-
     // Exercisi 7
     public void executeBrowser() {
         final Process process = getProcess("executarhtml/ExecutarHtml.java");
@@ -139,4 +137,7 @@ public class URL {
         this.url = url;
     }
 
+    public String getHtml() {
+        return String.join("\n", HTML);
+    }
 }

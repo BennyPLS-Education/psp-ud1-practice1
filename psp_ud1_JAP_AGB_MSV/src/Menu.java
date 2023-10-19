@@ -12,10 +12,14 @@ public class Menu {
         option = getNumber();
 
         switch (option) {
-            case 1 -> url.download();
+            case 1 -> {
+                url.download();
+                System.out.println(url.getHtml());
+            }
             case 2 -> url.charCounter('a');
             case 3 -> url.replaceLetter('a', 'c');
             case 7 -> url.executeBrowser();
+            case 8 -> System.exit(0);
             default -> System.out.println("Opció no vàlida");
         }
 
@@ -44,7 +48,7 @@ public class Menu {
         System.out.println("-------------------------");
         System.out.println("          MENU");
         System.out.println("-------------------------");
-        System.out.println("1. Carregar pàgina Web");
+        System.out.println("1. Descarregar pàgina Web");
         System.out.println("2. Analitzar el nombre de caràcters");
         System.out.println("3. Substituir lletra");
         System.out.println("4. Llegir encrypted.txt");
