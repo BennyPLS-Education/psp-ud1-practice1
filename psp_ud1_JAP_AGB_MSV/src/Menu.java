@@ -21,7 +21,7 @@ public class Menu {
                 url.charCounter(getUserInputChar());
             }
             case 3 -> {
-                System.out.print("Introdueix el caracter que vols cambiar i el que el cambiarà respectivament: ");
+                System.out.println("Introdueix el caracter que vols cambiar i el que el cambiarà respectivament: ");
                 url.replaceLetter(getUserInputChar(), getUserInputChar());
             }
             case 4 -> {
