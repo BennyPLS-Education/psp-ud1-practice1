@@ -67,6 +67,7 @@ public class URL {
     }
 
     public void replaceLetter(char oldChar, char newChar) {
+        if (HTML == null) download();
         final Process process = getProcess("substituirlletra/SubstituirLletra.java");
 
         try {
@@ -91,16 +92,8 @@ public class URL {
         final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
 
         try {
-            try (var writer = new Writer(process.outputWriter())) {
-                writer.writeLines(HTML);
-            }
-
-            process.waitFor();
-
-            try (var reader = new Reader(process.inputReader())) {
-                reader.toSystemOut();
-            }
-        } catch (IOException | InterruptedException e) {
+             process.waitFor();
+        } catch (InterruptedException e) {
             System.out.println("ERROR : " + e.getMessage());
         }
     }
