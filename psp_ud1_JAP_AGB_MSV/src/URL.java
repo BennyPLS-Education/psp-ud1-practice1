@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class URL {
@@ -84,6 +82,32 @@ public class URL {
 
         } catch (IOException | InterruptedException e) {
             System.out.println("ERROR : " + e.getMessage());
+        }
+    }
+
+
+
+    // Exercisi 7
+    public void executeBrowser() {
+        final Process process = getProcess("executarhtml/ExecutarHtml.java");
+
+
+        var scanner = new Scanner(System.in);
+        var file = new File("index.html");
+        var exists = file.exists();
+
+        if (exists) {
+            System.out.println("Okey");
+        } else {
+            System.out.println("Vols executar la opció 6 per crear l'arxiu index.html? s/n");
+            var execute = scanner.nextLine();
+
+            if (execute.equals("s")) {
+//                CrearHTMLIndex();
+                executeBrowser();
+            } else {
+                System.out.println("Abortant...");
+            }
         }
     }
 
