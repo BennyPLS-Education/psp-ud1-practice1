@@ -18,10 +18,10 @@ import java.util.Scanner;
 
 public class AnalitzarCaracters {
     public static void main(String[] args) throws Exception {
-        var scanner = new Scanner(System.in);
-        var letter = scanner.nextLine();
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        var letter = in.readLine();
+
         String linea = null;
         String text = "";
 
