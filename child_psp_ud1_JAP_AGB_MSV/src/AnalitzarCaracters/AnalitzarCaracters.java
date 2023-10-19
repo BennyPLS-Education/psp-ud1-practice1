@@ -18,7 +18,6 @@ import java.util.Scanner;
 
 public class AnalitzarCaracters {
     public static void main(String[] args) throws Exception {
-
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         var letter = in.readLine();
 
