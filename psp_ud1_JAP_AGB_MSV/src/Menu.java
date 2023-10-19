@@ -15,6 +15,7 @@ public class Menu {
             case 1 -> url.download();
             case 2 -> url.charCounter('a');
             case 3 -> url.replaceLetter('a', 'c');
+            case 7 -> url.executeBrowser();
             default -> System.out.println("Opció no vàlida");
         }
 

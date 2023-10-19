@@ -91,7 +91,6 @@ public class URL {
     public void executeBrowser() {
         final Process process = getProcess("executarhtml/ExecutarHtml.java");
 
-
         var scanner = new Scanner(System.in);
         var file = new File("index.html");
         var exists = file.exists();
