@@ -21,10 +21,12 @@ public class Menu {
                 url.charCounter(getUserInputChar());
             }
             case 3 -> {
-                System.out.print("Introdueix el caracter que vols cambiar i el que el cambiara respectivament: ");
+                System.out.print("Introdueix el caracter que vols cambiar i el que el cambiarà respectivament: ");
                 url.replaceLetter(getUserInputChar(), getUserInputChar());
             }
-            case 4 -> throw new UnsupportedOperationException("Not implemented yet");
+            case 4 -> {
+                throw new UnsupportedOperationException("Not implemented yet");
+            }
             case 5 -> throw new UnsupportedOperationException("Not implemented yet");
             case 6 -> throw new UnsupportedOperationException("Not implemented yet");
             case 7 -> url.executeBrowser();
