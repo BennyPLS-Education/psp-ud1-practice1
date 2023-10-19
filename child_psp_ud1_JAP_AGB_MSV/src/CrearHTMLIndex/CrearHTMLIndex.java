@@ -17,9 +17,19 @@ public class CrearHTMLIndex {
         PrintWriter out = new PrintWriter(new FileWriter("index.html"));
 
         String c;
+        String html = "";
+
         while ((c = in.readLine()) != null) {
-            out.println(c);
+            html += c;
         }
+
+        var bodyIndexStart = html.indexOf("<body");
+        var bodyIndexStartEnd = html.indexOf(">", bodyIndexStart);
+        var bodyIndexEnd = html.lastIndexOf("</body>");
+
+        var body = html.substring(bodyIndexStartEnd + 1, bodyIndexEnd);
+
+        out.println(body);
 
         in.close();
         out.close();

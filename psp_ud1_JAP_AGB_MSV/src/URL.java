@@ -87,6 +87,24 @@ public class URL {
         }
     }
 
+    public void writeHTML() {
+        final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
+
+        try {
+            try (var writer = new Writer(process.outputWriter())) {
+                writer.writeLines(HTML);
+            }
+
+            process.waitFor();
+
+            try (var reader = new Reader(process.inputReader())) {
+                reader.toSystemOut();
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println("ERROR : " + e.getMessage());
+        }
+    }
+
     // Exercisi 7
     public void executeBrowser() {
         final Process process = getProcess("executarhtml/ExecutarHtml.java");

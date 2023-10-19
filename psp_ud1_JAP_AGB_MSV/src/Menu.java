@@ -28,7 +28,7 @@ public class Menu {
                 throw new UnsupportedOperationException("Not implemented yet");
             }
             case 5 -> throw new UnsupportedOperationException("Not implemented yet");
-            case 6 -> throw new UnsupportedOperationException("Not implemented yet");
+            case 6 -> url.writeHTML();
             case 7 -> url.executeBrowser();
             case 8 -> System.exit(0);
             default -> System.out.println("Opció no vàlida");
