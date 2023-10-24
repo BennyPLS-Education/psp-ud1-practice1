@@ -100,7 +100,11 @@ public class URL {
         }
 
         try {
-            process.waitFor();
+            var status = process.waitFor();
+            if (status == 69) {
+                System.err.println("ERROR : No hi ha body, tria una altre web");
+                return;
+            }
 
             try (var reader = new Reader(process.inputReader())) {
                 reader.toSystemOut();
