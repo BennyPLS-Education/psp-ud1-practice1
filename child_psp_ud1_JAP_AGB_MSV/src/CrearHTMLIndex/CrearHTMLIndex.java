@@ -23,6 +23,11 @@ public class CrearHTMLIndex {
             html += c + "\n";
         }
 
+        /*
+        * Read the file between <body> and </body>
+        * We create "bodyIndexStart" and "bodyIndexStartEnd" to get the index of the first ">" after the body tag,
+        * so if the body tag have attributes we can get the index of the first ">" after the attributes.
+        * */
         var bodyIndexStart = html.indexOf("<body");
         var bodyIndexStartEnd = html.indexOf(">", bodyIndexStart);
         var bodyIndexEnd = html.lastIndexOf("</body>");
