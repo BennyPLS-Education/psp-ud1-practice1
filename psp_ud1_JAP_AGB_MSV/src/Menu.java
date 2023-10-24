@@ -34,7 +34,7 @@ public class Menu {
             default -> System.out.println("Opció no vàlida");
         }
 
-        if (option != 8) mainLoop(url);
+        mainLoop(url);
     }
 
     static char getUserInputChar() {
