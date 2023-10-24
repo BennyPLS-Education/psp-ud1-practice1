@@ -116,6 +116,21 @@ public class URL {
     public void writeHTML() {
         final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
 
+        var file = new File("encrypted.txt");
+        if (!file.exists()) {
+            System.err.println("ERROR : encrypted.txt no existeix\nVols executar l'opció 3? s/n");
+            var scanner = new Scanner(System.in);
+            var execute = scanner.nextLine();
+
+            if (execute.equals("s")) {
+                System.out.println("Introdueix el caracter que vols cambiar i el que el cambiarà respectivament: ");
+                replaceLetter(Menu.getUserInputChar(), Menu.getUserInputChar());
+            } else {
+                System.err.println("Abortant...");
+                return;
+            }
+        }
+
         try {
              process.waitFor();
         } catch (InterruptedException e) {
