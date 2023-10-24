@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 public class URL {
 
     private static final Pattern URL_PATTERN = Pattern.compile("^(http|https)://.*$");
+//    private static String separator = System.getProperty("file.separator");
     private static final String PATH = "../child_psp_ud1_JAP_AGB_MSV/src/";
 
     // Properties
