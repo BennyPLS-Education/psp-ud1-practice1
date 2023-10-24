@@ -20,7 +20,7 @@ public class CrearHTMLIndex {
         String html = "";
 
         while ((c = in.readLine()) != null) {
-            html += c;
+            html += c + "\n";
         }
 
         var bodyIndexStart = html.indexOf("<body");
