@@ -25,7 +25,7 @@ public class Menu {
                 url.replaceLetter(getUserInputChar(), getUserInputChar());
             }
             case 4 -> {
-                throw new UnsupportedOperationException("Not implemented yet");
+                url.llegirEncrypted();
             }
             case 5 -> throw new UnsupportedOperationException("Not implemented yet");
             case 6 -> url.writeHTML();

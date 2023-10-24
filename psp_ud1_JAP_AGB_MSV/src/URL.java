@@ -23,6 +23,7 @@ public class URL {
 
     // Public Methods
 
+    // 1
     public void download() {
         System.out.println("Downloading... " + this.url);
 
@@ -39,10 +40,11 @@ public class URL {
                 HTML = reader.lines().toList().toArray(new String[0]);
             }
         } catch (IOException | InterruptedException e) {
-            System.out.println("ERROR : " + e.getMessage());
+            System.err.println("ERROR : " + e.getMessage());
         }
     }
 
+    // 2
     public void charCounter(char selection) {
         if (HTML == null) download();
 
@@ -60,12 +62,12 @@ public class URL {
                 reader.toSystemOut();
             }
         } catch (Exception e) {
-            System.out.println("ERROR : " + e.getMessage());
+            System.err.println("ERROR : " + e.getMessage());
         }
 
 
     }
-
+    // 3
     public void replaceLetter(char oldChar, char newChar) {
         if (HTML == null) download();
         final Process process = getProcess("substituirlletra/SubstituirLletra.java");
@@ -84,17 +86,40 @@ public class URL {
             }
 
         } catch (IOException | InterruptedException e) {
-            System.out.println("ERROR : " + e.getMessage());
+            System.err.println("ERROR : " + e.getMessage());
         }
     }
+    // 4
+    public void llegirEncrypted() {
+        final Process process = getProcess("LlegirEncrypted/LlegirEncrypted.java");
 
+        var file = new File("encrypted.txt");
+        if (!file.exists()) {
+            System.err.println("ERROR : encrypted.txt no existeix Executa primer la opció 3");
+            return;
+        }
+
+        try {
+            process.waitFor();
+
+            try (var reader = new Reader(process.inputReader())) {
+                reader.toSystemOut();
+            }
+        } catch (IOException | InterruptedException e) {
+            System.err.println("ERROR : " + e.getMessage());
+        }
+
+    }
+    // 5
+
+    // 6
     public void writeHTML() {
         final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
 
         try {
              process.waitFor();
         } catch (InterruptedException e) {
-            System.out.println("ERROR : " + e.getMessage());
+            System.err.println("ERROR : " + e.getMessage());
         }
     }
 
@@ -109,14 +134,14 @@ public class URL {
         if (exists) {
             System.out.println("Okey");
         } else {
-            System.out.println("Vols executar la opció 6 per crear l'arxiu index.html? s/n");
+            System.err.println("Vols executar la opció 6 per crear l'arxiu index.html? s/n");
             var execute = scanner.nextLine();
 
             if (execute.equals("s")) {
 //                CrearHTMLIndex();
                 executeBrowser();
             } else {
-                System.out.println("Abortant...");
+                System.err.println("Abortant...");
             }
         }
     }
