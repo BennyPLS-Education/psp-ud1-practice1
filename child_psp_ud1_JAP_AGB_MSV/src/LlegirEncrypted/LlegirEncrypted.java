@@ -16,13 +16,17 @@ import java.util.Scanner;
 
 public class LlegirEncrypted {
     public static void main(String[] args) throws Exception {
+        // Crear el buffer de lectura
         BufferedReader in = new BufferedReader(new FileReader("encrypted.txt"));
 
+        // inicialitzar variables
         String c;
+        // llegir el text
         while ((c = in.readLine()) != null) {
             System.out.println(c);
         }
 
+        // tancar el buffer
         in.close();
     }
 }

@@ -15,11 +15,14 @@ import java.io.InputStreamReader;
 
 public class CercarParaulesClau {
     public static void main(String[] args) throws Exception {
+        // Crear el buffer de lectura
         var in = new BufferedReader(new InputStreamReader(System.in));
 
+        // inicialitzar variables
         var word = in.readLine();
         var hasWord = String.join("", in.lines().toList()).contains(word);
 
+        // Comproba si conte la paraula
         if (hasWord)
             System.out.println("Si que conte la paraula");
         else
