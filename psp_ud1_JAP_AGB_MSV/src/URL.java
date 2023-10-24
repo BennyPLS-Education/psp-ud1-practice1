@@ -64,8 +64,6 @@ public class URL {
         } catch (Exception e) {
             System.err.println("ERROR : " + e.getMessage());
         }
-
-
     }
     // 3
     public void replaceLetter(char oldChar, char newChar) {
@@ -109,6 +107,26 @@ public class URL {
 
     }
     // 5
+    public void cercarParaulaClau(String paraula) {
+        if (HTML == null) download();
+
+        final Process process = getProcess("cercarparaulesclau/CercarParaulesClau.java");
+
+        try {
+            try (var writer = new Writer(process.outputWriter())) {
+                writer.writeLine(paraula);
+                writer.writeLines(HTML);
+            }
+
+            process.waitFor();
+
+            try (var reader = new Reader(process.inputReader())) {
+                reader.toSystemOut();
+            }
+        } catch (Exception e) {
+            System.err.println("ERROR : " + e.getMessage());
+        }
+    }
 
     // 6
     public void writeHTML() {

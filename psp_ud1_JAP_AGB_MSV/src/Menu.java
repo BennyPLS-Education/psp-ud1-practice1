@@ -27,7 +27,14 @@ public class Menu {
             case 4 -> {
                 url.llegirEncrypted();
             }
-            case 5 -> throw new UnsupportedOperationException("Not implemented yet");
+            case 5 -> {
+                System.out.println("Introdueix la paraula clau que vols cercar: ");
+                var paraula = getUserInput();
+                if (paraula.contains(" "))
+                    System.out.println("ERROR : La paraula clau no pot contenir espais");
+                else
+                    url.cercarParaulaClau(paraula);
+            }
             case 6 -> url.writeHTML();
             case 7 -> url.executeBrowser();
             case 8 -> System.exit(0);
