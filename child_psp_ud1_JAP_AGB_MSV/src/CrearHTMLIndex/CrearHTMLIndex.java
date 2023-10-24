@@ -27,10 +27,8 @@ public class CrearHTMLIndex {
         var bodyIndexStartEnd = html.indexOf(">", bodyIndexStart);
         var bodyIndexEnd = html.lastIndexOf("</body>");
 
-        if (bodyIndexStart == -1 || bodyIndexStartEnd == -1 || bodyIndexEnd == -1) {
-            System.out.println("No s'ha trobat el body");
-            System.exit(1);
-        }
+        if (bodyIndexStart == -1 || bodyIndexStartEnd == -1 || bodyIndexEnd == -1)
+            System.exit(69);
 
         var body = html.substring(bodyIndexStartEnd + 1, bodyIndexEnd);
 

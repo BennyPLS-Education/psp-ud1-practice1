@@ -91,21 +91,15 @@ public class URL {
     }
     // 4
     public void llegirEncrypted() {
-        final Process process = getProcess("LlegirEncrypted/LlegirEncrypted.java");
-
         var file = new File("encrypted.txt");
         if (!file.exists()) {
             System.err.println("ERROR : encrypted.txt no existeix Executa primer la opció 3");
             return;
         }
 
+        final Process process = getProcess("LlegirEncrypted/LlegirEncrypted.java");
         try {
-            var status = process.waitFor();
-            if (status == 69) {
-                System.err.println("ERROR : No hi ha body, tria una altre web");
-                return;
-            }
-
+            process.waitFor();
             try (var reader = new Reader(process.inputReader())) {
                 reader.toSystemOut();
             }
@@ -118,11 +112,9 @@ public class URL {
 
     // 6
     public void writeHTML() {
-        final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
-
         var file = new File("encrypted.txt");
         if (!file.exists()) {
-            System.err.println("ERROR : encrypted.txt no existeix\nVols executar l'opció 3? s/n");
+            System.out.println("ERROR : encrypted.txt no existeix\nVols executar l'opció 3? s/n");
             var scanner = new Scanner(System.in);
             var execute = scanner.nextLine();
 
@@ -130,13 +122,19 @@ public class URL {
                 System.out.println("Introdueix el caracter que vols cambiar i el que el cambiarà respectivament: ");
                 replaceLetter(Menu.getUserInputChar(), Menu.getUserInputChar());
             } else {
-                System.err.println("Abortant...");
+                System.out.println("Abortant...");
                 return;
             }
         }
 
+        final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
         try {
-             process.waitFor();
+             var status = process.waitFor();
+            System.out.println("Status : " + status);
+            if (status == 69) {
+                System.out.println("ERROR : No hi ha body, tria una altre web");
+                return;
+            }
         } catch (InterruptedException e) {
             System.err.println("ERROR : " + e.getMessage());
         }
@@ -144,7 +142,6 @@ public class URL {
 
     // Exercisi 7
     public void executeBrowser() {
-        final Process process = getProcess("executarhtml/ExecutarHtml.java");
 
         var scanner = new Scanner(System.in);
         var file = new File("index.html");
@@ -152,6 +149,7 @@ public class URL {
 
         if (exists) {
             System.out.println("Okey");
+            final Process process = getProcess("executarhtml/ExecutarHtml.java");
         } else {
             System.err.println("Vols executar la opció 6 per crear l'arxiu index.html? s/n");
             var execute = scanner.nextLine();
