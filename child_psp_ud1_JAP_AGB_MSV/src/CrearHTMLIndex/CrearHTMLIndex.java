@@ -36,8 +36,11 @@ public class CrearHTMLIndex {
         var bodyIndexEnd = html.lastIndexOf("</body>");
 
         // If the body tag doesn't exist, exit the program
-        if (bodyIndexStart == -1 || bodyIndexStartEnd == -1 || bodyIndexEnd == -1)
-            System.exit(69);
+        if (bodyIndexStart == -1 || bodyIndexStartEnd == -1 || bodyIndexEnd == -1) {
+            System.out.println("ERROR : The body tag doesn't exist");
+            System.exit(1);
+        }
+
 
         // Get the content between <body> and </body>
         var body = html.substring(bodyIndexStartEnd + 1, bodyIndexEnd);
@@ -48,5 +51,7 @@ public class CrearHTMLIndex {
         // Close the buffers
         in.close();
         out.close();
+
+        System.out.println("The file index.html has been created");
     }
 }

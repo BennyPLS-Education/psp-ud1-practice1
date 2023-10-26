@@ -47,14 +47,13 @@ public class URL {
             }
 
             // Wait for the external process to finish.
-            process.waitFor();
 
             // Create a reader to read the downloaded content from the process.
             try (BufferedReader reader = process.inputReader()) {
                 // Read the content into the 'HTML' array as an array of strings.
                 HTML = reader.lines().toList().toArray(new String[0]);
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             // If an IOException or InterruptedException occurs, print an error message.
             System.err.println("ERROR : " + e.getMessage());
         }
@@ -83,8 +82,6 @@ public class URL {
                 writer.writeLines(HTML);
             }
 
-            // Wait for the external process to finish.
-            process.waitFor();
 
             // Create a reader to read the character count result and print it to the system output.
             try (var reader = new Reader(process.inputReader())) {
@@ -121,8 +118,6 @@ public class URL {
                 writer.writeLines(HTML);
             }
 
-            // Wait for the external process to finish.
-            process.waitFor();
 
             // Create a reader to read the modified HTML content and print it to the system output.
             try (var reader = new Reader(process.inputReader())) {
@@ -155,8 +150,7 @@ public class URL {
         final Process process = Children.getProcess(Children.Actions.READ_ENCRYPTED);
 
         try {
-            // Wait for the external process to finish.
-            process.waitFor();
+
 
             // Create a reader to read the encrypted content and print it to the system output.
             try (var reader = new Reader(process.inputReader())) {
@@ -191,8 +185,7 @@ public class URL {
                 writer.writeLines(HTML);
             }
 
-            // Wait for the external process to finish.
-            process.waitFor();
+
 
             // Create a reader to read and print the search result to the system output.
             try (var reader = new Reader(process.inputReader())) {
@@ -238,20 +231,10 @@ public class URL {
         final Process process = Children.getProcess(Children.Actions.CREATE_HTML);
 
         try {
-            // Wait for the external process to finish and retrieve its status.
-            var status = process.waitFor();
-
-            // Transfer any error stream content to the system output.
-            process.getErrorStream().transferTo(System.out);
-
-            System.out.println("Status : " + status);
-
-            if (status == 69) {
-                System.out.println("ERROR : No 'body' tag found; please choose another web source.");
-                return;
+            try (var reader = new Reader(process.inputReader())) {
+                reader.toSystemOut();
             }
-        } catch (InterruptedException e) {
-            System.err.println("ERROR : " + e.getMessage());
+            // Transfer any error stream content to the system output.
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
