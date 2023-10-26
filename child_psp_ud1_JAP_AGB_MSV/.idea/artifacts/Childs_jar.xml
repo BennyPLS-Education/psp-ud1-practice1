@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="Childs:jar">
+    <output-path>$PROJECT_DIR$/../psp_ud1_JAP_AGB_MSV</output-path>
+    <root id="root">
+      <element id="archive" name="Child.jar">
+        <element id="module-output" name="child_psp_ud1_JAP_AGB_MSV" />
+      </element>
+    </root>
+  </artifact>
+</component>

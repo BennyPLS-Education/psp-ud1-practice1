@@ -1,26 +1,14 @@
 import java.util.Scanner;
 
 public class Main {
-
-    private static final Scanner console = new Scanner(System.in);
+    /**
+     * The main method of the application.
+     */
     public static void main(String[] args) {
-        URL url = getUrl();
+        try (var console = new Console(new Scanner(System.in))) {
+            URL url = console.getUrl();
 
-        Menu.mainLoop(url);
-    }
-
-    static URL getUrl() {
-        try {
-            System.out.print("Enter a URL: ");
-
-            return new URL(getUserInput());
-        } catch (IllegalArgumentException e) {
-            System.out.println("ERROR : " + e.getMessage());
-            return getUrl();
+            new Menu(console).mainLoop(url);
         }
-    }
-
-    static String getUserInput() {
-        return console.nextLine();
     }
 }

@@ -1,9 +1,13 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class URL {
 
+    // Constants
     private static final Pattern URL_PATTERN = Pattern.compile("^(http|https)://.*$");
 //    private static String separator = System.getProperty("file.separator");
     private static final String PATH = "../child_psp_ud1_JAP_AGB_MSV/src/";
@@ -13,7 +17,6 @@ public class URL {
     private String[] HTML = null;
 
     // Constructors
-
     public URL(String url) throws IllegalArgumentException {
         this.url = url;
 
@@ -28,7 +31,7 @@ public class URL {
     public void download() {
         System.out.println("Downloading... " + this.url);
 
-        final Process process = getProcess("carregarweb/CarregarWeb.java");
+        final Process process = Children.getProcess(Children.Actions.DOWNLOAD);
 
         try {
             try (BufferedWriter writer = process.outputWriter()) {
@@ -49,7 +52,7 @@ public class URL {
     public void charCounter(char selection) {
         if (HTML == null) download();
 
-        final Process process = getProcess("AnalitzarCaracters/AnalitzarCaracters.java");
+        final Process process = Children.getProcess(Children.Actions.CHAR_COUNTER);
 
         try {
             try (var writer = new Writer(process.outputWriter())) {
@@ -66,10 +69,11 @@ public class URL {
             System.err.println("ERROR : " + e.getMessage());
         }
     }
+
     // 3
     public void replaceLetter(char oldChar, char newChar) {
         if (HTML == null) download();
-        final Process process = getProcess("substituirlletra/SubstituirLletra.java");
+        final Process process = Children.getProcess(Children.Actions.REPLACE_LETTER);
 
         try {
             try (var writer = new Writer(process.outputWriter())) {
@@ -88,6 +92,7 @@ public class URL {
             System.err.println("ERROR : " + e.getMessage());
         }
     }
+
     // 4
     public void llegirEncrypted() {
         var file = new File("encrypted.txt");
@@ -96,7 +101,7 @@ public class URL {
             return;
         }
 
-        final Process process = getProcess("LlegirEncrypted/LlegirEncrypted.java");
+        final Process process = Children.getProcess(Children.Actions.READ_ENCRYPTED);
         try {
             process.waitFor();
             try (var reader = new Reader(process.inputReader())) {
@@ -107,11 +112,12 @@ public class URL {
         }
 
     }
+
     // 5
     public void cercarParaulaClau(String paraula) {
         if (HTML == null) download();
 
-        final Process process = getProcess("cercarparaulesclau/CercarParaulesClau.java");
+        final Process process = Children.getProcess(Children.Actions.SEARCH_KEYWORD);
 
         try {
             try (var writer = new Writer(process.outputWriter())) {
@@ -139,16 +145,18 @@ public class URL {
 
             if (execute.equals("s")) {
                 System.out.println("Introdueix el caracter que vols cambiar i el que el cambiarà respectivament: ");
-                replaceLetter(Menu.getUserInputChar(), Menu.getUserInputChar());
+                try (var console = new Console(new Scanner(System.in))) {
+                    replaceLetter(console.getUserInputChar(), console.getUserInputChar());
+                }
             } else {
                 System.out.println("Abortant...");
                 return;
             }
         }
 
-        final Process process = getProcess("CrearHTMLIndex/CrearHTMLIndex.java");
+        final Process process = Children.getProcess(Children.Actions.CREATE_HTML);
         try {
-             var status = process.waitFor();
+            var status = process.waitFor();
             System.out.println("Status : " + status);
             if (status == 69) {
                 System.out.println("ERROR : No hi ha body, tria una altre web");
@@ -168,7 +176,7 @@ public class URL {
 
         if (exists) {
             System.out.println("Okey");
-            final Process process = getProcess("executarhtml/ExecutarHtml.java");
+            final Process process = Children.getProcess(Children.Actions.EXECUTE_HTML);
         } else {
             System.err.println("Vols executar la opció 6 per crear l'arxiu index.html? s/n");
             var execute = scanner.nextLine();
@@ -183,19 +191,6 @@ public class URL {
     }
 
     // Private Methods
-
-    private Process getProcess(String x) {
-        Process p = null;
-
-        try {
-            p = new ProcessBuilder("java", PATH + x).start();
-        } catch (IOException e) {
-            System.out.println("ERROR : " + e.getMessage());
-            System.exit(1);
-        }
-
-        return p;
-    }
 
     private boolean validateUrl() {
         return URL_PATTERN.matcher(this.url).matches();
