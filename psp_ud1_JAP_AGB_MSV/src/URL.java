@@ -123,7 +123,7 @@ public class URL {
             try (var reader = new Reader(process.inputReader())) {
                 reader.toSystemOut();
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             // If an IOException or InterruptedException occurs, print an error message.
             System.err.println("ERROR : " + e.getMessage());
         }
@@ -156,7 +156,7 @@ public class URL {
             try (var reader = new Reader(process.inputReader())) {
                 reader.toSystemOut();
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             // If an IOException or InterruptedException occurs, print an error message.
             System.err.println("ERROR : " + e.getMessage());
         }
