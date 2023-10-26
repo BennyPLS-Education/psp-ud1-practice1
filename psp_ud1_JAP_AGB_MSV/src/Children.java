@@ -4,6 +4,10 @@ public class Children {
 
     private static final String JAR_FILE = "Child.jar";
 
+
+    /**
+     * Jar files that can be executed by the program.
+     */
     public enum Actions {
         DOWNLOAD("carregarweb.CarregarWeb"),
         CHAR_COUNTER("AnalitzarCaracters.AnalitzarCaracters"),
@@ -15,15 +19,31 @@ public class Children {
 
         private final String classpath;
 
+        /**
+         * Constructs an Action with a specified classpath.
+         *
+         * @param classpath The classpath of the action.
+         */
         Actions(String classpath) {
             this.classpath = classpath;
         }
 
+        /**
+         * Get the classpath associated with the action.
+         *
+         * @return The classpath of the action.
+         */
         public String getClasspath() {
             return classpath;
         }
     }
 
+    /**
+     * Gets a Process object for the specified action.
+     *
+     * @param action The action to get the Process for.
+     * @return A Process object for the specified action.
+     */
     public static Process getProcess(Actions action) {
         Process process = null;
 
