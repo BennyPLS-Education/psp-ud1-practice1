@@ -18,26 +18,26 @@ import java.util.Scanner;
 
 public class AnalitzarCaracters {
     public static void main(String[] args) throws Exception {
-        // Crear el buffer de lectura
+        // Create the reading buffer
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         var letter = in.readLine();
 
-        // inicialitzar variables
+        // Initialize variables
         String linea = null;
         StringBuilder text = new StringBuilder();
 
-        // llegir el text
+        // Read the text
         while((linea = in.readLine()) != null) {
             text.append(linea);
             if (linea.equals(" ")) break;
         }
 
-        // imprimir i tancar el buffer
+        // Print and close the buffer
         System.out.println(countLetter(text.toString(), letter.charAt(0)) + "\n");
         in.close();
     }
 
-    // conta el nombre de lletras que hi ha en un String
+    // Count the number of letters in a String
     private static int countLetter(String text, char letter) {
         int count = 0;
 

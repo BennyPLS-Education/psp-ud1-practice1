@@ -13,15 +13,15 @@ import java.util.Scanner;
 
 public class CrearHTMLIndex {
     public static void main(String[] args) throws Exception {
-        // Crear el buffer de lectura i escritura
+        // Create the read and write buffers
         BufferedReader in = new BufferedReader(new FileReader("encrypted.txt"));
         PrintWriter out = new PrintWriter(new FileWriter("index.html"));
 
-        // inicialitzar variables
+        // Initialize variables
         String c;
         String html = "";
 
-        // llegir el text
+        // Read the text
         while ((c = in.readLine()) != null) {
             html += c + "\n";
         }
@@ -35,17 +35,17 @@ public class CrearHTMLIndex {
         var bodyIndexStartEnd = html.indexOf(">", bodyIndexStart);
         var bodyIndexEnd = html.lastIndexOf("</body>");
 
-        // if the body tag doesn't exist, exit the program
+        // If the body tag doesn't exist, exit the program
         if (bodyIndexStart == -1 || bodyIndexStartEnd == -1 || bodyIndexEnd == -1)
             System.exit(69);
 
-        // get the content between <body> and </body>
+        // Get the content between <body> and </body>
         var body = html.substring(bodyIndexStartEnd + 1, bodyIndexEnd);
 
-        // write the content in index.html
+        // Write the content to index.html
         out.println(body);
 
-        // tancar els buffers
+        // Close the buffers
         in.close();
         out.close();
     }
