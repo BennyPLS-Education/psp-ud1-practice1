@@ -9,11 +9,9 @@ public class URL {
 
     // Constants
     private static final Pattern URL_PATTERN = Pattern.compile("^(http|https)://.*$");
-//    private static String separator = System.getProperty("file.separator");
-    private static final String PATH = "../child_psp_ud1_JAP_AGB_MSV/src/";
 
     // Properties
-    private String url;
+    private final String url;
     private String[] HTML = null;
 
     // Constructors
@@ -28,6 +26,7 @@ public class URL {
     // Public Methods
 
     // 1
+
     /**
      * Downloads content from a specified URL using an external process.
      * This method prints the download progress and stores the downloaded content
@@ -61,6 +60,7 @@ public class URL {
 
 
     // 2
+
     /**
      * Counts the occurrences of a specified character in the downloaded HTML content.
      * If the HTML content has not been downloaded, it first initiates the download.
@@ -95,6 +95,7 @@ public class URL {
 
 
     // 3
+
     /**
      * Replaces occurrences of a specified character with another character in the downloaded HTML content.
      * If the HTML content has not been downloaded, it first initiates the download.
@@ -131,6 +132,7 @@ public class URL {
 
 
     // 4
+
     /**
      * Reads and displays the content of an encrypted text file ("encrypted.txt") using an external process.
      * If the file does not exist, it prints an error message and returns without attempting to read.
@@ -164,6 +166,7 @@ public class URL {
 
 
     // 5
+
     /**
      * Searches for a specified keyword within the downloaded HTML content.
      * If the HTML content has not been downloaded, it first initiates the download.
@@ -186,7 +189,6 @@ public class URL {
             }
 
 
-
             // Create a reader to read and print the search result to the system output.
             try (var reader = new Reader(process.inputReader())) {
                 reader.toSystemOut();
@@ -199,6 +201,7 @@ public class URL {
 
 
     // 6
+
     /**
      * Writes the HTML content to a file ("encrypted.txt") using an external process.
      * If the file does not exist, it prompts the user to execute a specific option (option 3).
@@ -230,18 +233,14 @@ public class URL {
         // Get an external process for creating the HTML content.
         final Process process = Children.getProcess(Children.Actions.CREATE_HTML);
 
-        try {
-            try (var reader = new Reader(process.inputReader())) {
-                reader.toSystemOut();
-            }
-            // Transfer any error stream content to the system output.
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        try (var reader = new Reader(process.inputReader())) {
+            reader.toSystemOut();
+        } catch (IOException ignored) {}
     }
 
 
     // Exercisi 7
+
     /**
      * Executes a web browser to open the 'index.html' file. If the file does not exist, it prompts the user
      * to execute a specific option (option 6) to create the 'index.html' file or abort the operation.
@@ -253,14 +252,14 @@ public class URL {
 
         if (exists) {
             System.out.println("Okay");
-            final Process process = Children.getProcess(Children.Actions.EXECUTE_HTML);
+            Children.getProcess(Children.Actions.EXECUTE_HTML);
         } else {
             System.err.println("Do you want to execute option 6 to create the 'index.html' file? (y/n)");
             var execute = scanner.nextLine();
 
             if (execute.equals("y")) {
                 // Create 'index.html' using the appropriate method (commented out).
-                // CreateHTMLIndex();
+                writeHTML();
                 executeBrowser();
             } else {
                 System.err.println("Aborting...");
@@ -276,14 +275,6 @@ public class URL {
     }
 
     // Setters & Getters
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public String getHtml() {
         return String.join("\n", HTML);

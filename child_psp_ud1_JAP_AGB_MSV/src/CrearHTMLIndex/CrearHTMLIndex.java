@@ -38,6 +38,10 @@ public class CrearHTMLIndex {
         // If the body tag doesn't exist, exit the program
         if (bodyIndexStart == -1 || bodyIndexStartEnd == -1 || bodyIndexEnd == -1) {
             System.out.println("ERROR : The body tag doesn't exist");
+            out.println("ERROR : The body tag doesn't exist");
+
+            in.close();
+            out.close();
             System.exit(1);
         }
 

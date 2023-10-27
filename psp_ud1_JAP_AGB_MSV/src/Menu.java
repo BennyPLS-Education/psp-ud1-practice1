@@ -1,9 +1,15 @@
-import java.util.Scanner;
-
+/**
+ * The Menu class represents a menu that allows users to interact with a given URL object.
+ */
 public class Menu {
 
     private final Console console;
 
+    /**
+     * Initializes a new instance of the Menu class.
+     *
+     * @param console The console object used for input/output.
+     */
     public Menu(Console console) {
         this.console = console;
     }
@@ -46,10 +52,15 @@ public class Menu {
             }
             case 6 -> url.writeHTML();
             case 7 -> url.executeBrowser();
+            case 8 -> System.out.println("Adeu!");
             default -> System.out.println("Opció no vàlida");
         }
 
-        if (option != 8) mainLoop(url);
+        if (option != 8) {
+            System.out.print("Prem qualsevol tecla per continuar...");
+            console.getUserInput();
+            mainLoop(url);
+        }
     }
 
     /**

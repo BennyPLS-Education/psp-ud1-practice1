@@ -4,6 +4,24 @@ public class Children {
 
     private static final String JAR_FILE = "Child.jar";
 
+    /**
+     * Gets a Process object for the specified action.
+     *
+     * @param action The action to get the Process for.
+     * @return A Process object for the specified action.
+     */
+    public static Process getProcess(Actions action) {
+        Process process = null;
+
+        try {
+            process = new ProcessBuilder("java", "-cp", JAR_FILE, action.getClasspath()).start();
+        } catch (IOException e) {
+            System.out.println("ERROR : " + e.getMessage());
+            System.exit(1);
+        }
+
+        return process;
+    }
 
     /**
      * Jar files that can be executed by the program.
@@ -36,24 +54,5 @@ public class Children {
         public String getClasspath() {
             return classpath;
         }
-    }
-
-    /**
-     * Gets a Process object for the specified action.
-     *
-     * @param action The action to get the Process for.
-     * @return A Process object for the specified action.
-     */
-    public static Process getProcess(Actions action) {
-        Process process = null;
-
-        try {
-            process = new ProcessBuilder("java", "-cp", JAR_FILE, action.getClasspath()).start();
-        } catch (IOException e) {
-            System.out.println("ERROR : " + e.getMessage());
-            System.exit(1);
-        }
-
-        return process;
     }
 }
